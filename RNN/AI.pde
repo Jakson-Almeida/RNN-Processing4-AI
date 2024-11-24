@@ -59,6 +59,30 @@ public class AI {
     best_fitness = pso.pop[pso.bestPoseInd].fitness;
   }
   
+  public float[] getPopArray(int ind) {
+    if(ind >= numP) return null;
+    float[] _vet = new float[numP];
+    rnn.restart();
+    rnn.updateValues(weightsAndBias[ind]);
+    Matrix ent = rnn.getEntrance();
+    Matrix saida;
+    
+    for(int j = 0; j < fut; j++) {
+      ent.set(0, 0, 0);
+      rnn.feedforward();
+      saida = rnn.getOutput();
+      _vet[j] = saida.get(0, 0);
+    }
+    
+    for(int j = fut; j < numP; j++) {
+      ent.set(0, 0, d_vet[j-fut]);
+      rnn.feedforward();
+      saida = rnn.getOutput();
+      _vet[j] = saida.get(0, 0);
+    }
+    return _vet;
+  }
+  
   public void networkTest() {
     for(int i = 0; i < tam; i++) testarRede(i);
   }
@@ -163,6 +187,10 @@ public class AI {
     showFuncion(color(0, 0, 255), i_vet);
   }
   
+  public void showFuncion(int ind) {
+    showFuncion(color(127 - 3*ind, 127 - 3*ind, 0), getPopArray(ind));
+  }
+  
   public void showFuncion(float[] fn) {
     showFuncion(color(255, 0, 0), fn);
   }
@@ -181,6 +209,10 @@ public class AI {
       line(x, y, x1, y1);
       x += dx;
     }
+  }
+  
+  public void showIntegrativeFuncion(int ind) {
+    showFuncion(color(127 - 3*ind, 127 - 3*ind, 0), integrativeFunction(getPopArray(ind)));
   }
   
 }

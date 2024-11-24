@@ -102,9 +102,9 @@ public class Individual {
   float k_1 = 1;
   float k_2 = 1;
   float w = 0.3; // Constante para o somatório de velocidade
-  float dT = 0.4; // Em segundos
+  float dT = 0.3; // Em segundos
   float k_l = 5;
-  float k_d = 0.1;
+  float k_d = 0.03;
   float k_f = 110;
   Vector[] pose;
   Vector[] speed;
