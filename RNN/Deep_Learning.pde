@@ -1,3 +1,6 @@
+// RRN for Processing
+// 2024, Jakson-Almeida 
+
 public class Neural_Network {
   private Matrix[] layers;      // Para a camada presente cada vetor armazena os valores dos neurônios
   private Matrix[] deepLayers;  // Todas camadas temporais serão agrupadas em um único vetor de matrizes
