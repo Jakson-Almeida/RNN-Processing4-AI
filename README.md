@@ -1,3 +1,3 @@
-# RNN for Processing4 AI
+# RNN Library for Processing
 
 Recurrent Neural Network for processing.
